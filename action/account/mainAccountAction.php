@@ -11,16 +11,14 @@ if(!empty($_GET['action']))
      case "DISPOSITION":
         if(isset($_POST['submit']))
         {
-           $fullname = $_POST['fullname']; 
-           $phone = $_POST['phone']; 
-           $email = $_POST['email'];
-           $disposition = $_POST['disposition'];
-           $created_by = $account[0]['agent_id'];
-           if(!empty($disposition) && !empty($created_by))
+           $id = $_POST['id']; 
+           $status = $_POST['disposition'];
+           $agent_id = $account[0]['agent_id'];
+           if(!empty($id) && !empty($status) && !empty($agent_id))
            {
             try
             {
-                $portCont->uploadDisposition($fullname, $phone, $email, $disposition, $created_by);
+                $portCont->uploadDisposition($id, $status, $agent_id);
                 Header('Location:?view=HOME&message=success');
             }
             catch(Exception $e)

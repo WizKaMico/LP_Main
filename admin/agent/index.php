@@ -67,6 +67,11 @@ include('../../action/account/mainAccountAction.php');
                     case "HOME":
                         include('./routes/home.php');
                         break;
+                    case "LEADINFO":
+                        $id = $_GET['id'];
+                        $result = $portCont->specificLeadData($id);
+                        include('./routes/lead_info.php');
+                        break;
                     case "ACTIVITYLOG":
                         include('./routes/activity.php');
                         break;
@@ -138,5 +143,24 @@ include('../../action/account/mainAccountAction.php');
             document.head.appendChild(script);
         }
         </script>
+
+        <script>
+        $(document).ready(function() {
+            $('#dispositiontable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "../../api/server_processing_api.php",  // URL to PHP API file
+                    type: "GET",  // Make sure it's GET or POST as required by your API
+                    dataSrc: function (json) {
+                        console.log(json);  // Log the response to check if it is in the correct format
+                        return json.data;   // Ensure you're returning the correct part of the response
+                    }
+                }
+            });
+        });
+        </script>
+
+
   </body>
 </html>

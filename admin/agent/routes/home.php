@@ -17,7 +17,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-3 grid-margin">
+              <!-- <div class="col-3 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
@@ -54,40 +54,27 @@
                       </form>
                    </div>
                 </div>
-              </div>
-              </div>
-              <div class="col-6 grid-margin">
+              </div> 
+              </div>-->
+              <div class="col-9 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
-                      <h5><b>MY CALL DISPOSITION</b></h5>
+                      <h5><b>LEAD LIST</b></h5>
                       <hr />
                       <table id="dispositiontable" class="align-middle mb-0 table table-borderless table-striped table-hover">
                         <thead>
+                          <tr>
                             <th>Id</th>
                             <th>Fullname</th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Disposition</th>
-                            <th>Created By</th>
+                            <th>Address</th>
+                            <th>Agent</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                            $accounts = $portCont->myAgentSpecificDisposition($agent_id);
-                            if (!empty($accounts)) {
-                                foreach ($accounts as $key => $accounts) {
-                                    echo "<tr>
-                                            <td>".$accounts['disposition_id']."</td>   
-                                            <td>".$accounts['fullname']."</td>
-                                            <td>".$accounts['phone']."</td>
-                                            <td>".$accounts['email']."</td>
-                                            <td>".$accounts['disposition']."</td>
-                                            <td>".$accounts['agent']."</td>
-                                        </tr>";          
-                                }
-                            }
-                            ?>
-                        </tbody>
                       </table>
                     </div>
                   </div>

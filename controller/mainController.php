@@ -51,19 +51,32 @@ class accountCont extends DBController
         return $result;
     }
 
-    function uploadDisposition($fullname, $phone, $email, $disposition, $created_by)
+    // function uploadDisposition($fullname, $phone, $email, $disposition, $created_by)
+    // {
+    //     $query = "INSERT INTO lp_agent_disposition  (fullname, phone, email, disposition, created_by) VALUES (?,?,?,?,?)";
+
+    //     $params = array(
+    //     array("param_type" => "s", "param_value" => $fullname),
+    //     array("param_type" => "s", "param_value" => $phone),
+    //     array("param_type" => "s", "param_value" => $email),
+    //     array("param_type" => "s", "param_value" => $disposition),
+    //     array("param_type" => "i", "param_value" => $created_by)
+    //     );
+
+    //     $this->insertDB($query, $params);
+    // }
+
+    function uploadDisposition($id, $status, $agent_id)
     {
-        $query = "INSERT INTO lp_agent_disposition  (fullname, phone, email, disposition, created_by) VALUES (?,?,?,?,?)";
+        $query = "UPDATE lp_leads_call SET agent_id = ?, status = ? WHERE Id = ?";
 
         $params = array(
-        array("param_type" => "s", "param_value" => $fullname),
-        array("param_type" => "s", "param_value" => $phone),
-        array("param_type" => "s", "param_value" => $email),
-        array("param_type" => "s", "param_value" => $disposition),
-        array("param_type" => "i", "param_value" => $created_by)
+        array("param_type" => "i", "param_value" => $agent_id),
+        array("param_type" => "s", "param_value" => $status),
+        array("param_type" => "i", "param_value" => $id)
         );
 
-        $this->insertDB($query, $params);
+        $this->updateDB($query, $params);
     }
 
     function myAgentSpecificDisposition($agent_id)
@@ -75,6 +88,25 @@ class accountCont extends DBController
         );
 
         $result = $this->getDBResult($query, $params);
+        return $result;
+    }
+
+    function specificLeadData($id)
+    {
+        $query = "SELECT LAC.* FROM lp_leads_call LAC  WHERE LAC.Id = ?";
+
+        $params = array(
+        array("param_type" => "i", "param_value" => $id)
+        );
+
+        $result = $this->getDBResult($query, $params);
+        return $result;
+    }
+
+    function leadsList()
+    {
+        $query = "SELECT LAC.* FROM lp_leads_call LAC";
+        $result = $this->getDBResult($query);
         return $result;
     }
 
